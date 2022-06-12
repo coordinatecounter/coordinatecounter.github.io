@@ -1,0 +1,192 @@
+/* основные элементы */
+body {
+    background: linear-gradient(90deg, #29323C 0%, #485563 100%);
+}
+h1 {
+    color: white;
+    text-align: center;
+    letter-spacing: 6px;
+}
+h2 {
+    color: white;
+    text-align: center;
+    letter-spacing: 6px;
+}
+h3 {
+    color: rgb(31, 29, 29);
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+hr {
+    background: white;
+    width: 200px;
+    height: 3px;
+    border-radius: 4px;
+}
+label {
+    width: 500px;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+input {
+    transition: 0.3s all;
+    margin-top: 6px;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid white;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: rgb(70, 57, 57);
+}
+input:focus {
+    box-shadow: 0px 0px 3px 3px rgb(168, 170, 185);
+    outline: none;
+}
+
+/* главная страница */
+.preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 820px;
+    min-height: 650px;
+}
+.preview_block {
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    grid-template-rows: repeat(2, 250px);
+    gap: 50px;
+}
+
+/* кнопки на главной странице */
+.btn_show_diagonal, .btn_show_circle, .btn_show_cols, .btn_show_rows {
+    cursor: pointer;
+    width: 250px;
+    height: 250px;
+    transition: 0.5s all;
+    border-radius: 4px;
+    background: rgb(51, 159, 179);
+    border: solid 2px rgb(51, 159, 179);
+    color: white;
+    font-size: 30px;
+    font-weight: 500;
+}
+.btn_show_diagonal:hover, .btn_show_circle:hover, .btn_show_rows:hover, .btn_show_cols:hover {
+    background: rgb(35, 134, 151);
+    border: solid 2px white;
+    transform: scale(1.025);
+}
+.btn_show_diagonal:active, .btn_show_circle:active, .btn_show_rows:active, .btn_show_cols:active {
+    background: rgb(93, 211, 231);
+}
+
+/* странички */
+.diagonal, .circle, .rows, .cols {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* все формы на страницах */
+.form_diagonal {
+    margin-top: 20px;
+    width: 500px;
+    display: grid;
+    grid-template-rows: repeat(9, 90px);
+    align-items: center;
+}
+.form_circle {
+    margin-top: 20px;
+    width: 500px;
+    display: grid;
+    grid-template-rows: repeat(8, 90px);
+    align-items: center;
+}
+.form_rows {
+    margin-top: 20px;
+    width: 500px;
+    display: grid;
+    grid-template-rows: repeat(5, 90px);
+    align-items: center;
+}
+.form_cols {
+    margin-top: 20px;
+    width: 500px;
+    display: grid;
+    grid-template-rows: repeat(5, 90px);
+    align-items: center;
+}
+/* кнопка расчета */
+.btn {
+    transition: 0.2s all;
+    background: rgb(51, 159, 179);
+    height: 40px;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+.btn:hover {
+    background: rgb(35, 134, 151);
+}
+.btn:active {
+    background: rgb(93, 211, 231);
+    box-shadow: 0px 0px 3px 3px rgb(168, 170, 185);
+}
+
+/* новые координаты */
+.new_program_d, .new_program_c {
+    display: grid;
+    padding: 10px 0px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    background: white;
+    width: 500px;
+    justify-items: center;
+    border-radius: 4px;
+    transition: 0.5s all;
+}
+.program {
+    padding-left: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(61, 60, 60);
+}
+
+/* кнопка на главную + вспомогательные классы отображения */
+.btn_on_main_d, .btn_on_main_c, .btn_on_main_r, .btn_on_main_cols{
+    transition: 0.2s all;
+    background: rgb(51, 159, 179);
+    height: 40px;
+    color: white;
+    border-radius: 4px;
+    text-transform: uppercase;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    margin-top: 40px;
+}
+.btn_on_main_d:hover, .btn_on_main_c:hover, .btn_on_main_r:hover, .btn_on_main_cols:hover {
+    background: rgb(35, 134, 151);
+}
+.btn_on_main_d:active, .btn_on_main_c:active, .btn_on_main_r:active, .btn_on_main_cols:active {
+    background: rgb(93, 211, 231);
+    box-shadow: 0px 0px 3px 3px rgb(168, 170, 185);
+}
+.show {
+    display: flex;
+}
+.hide {
+    display: none;
+}

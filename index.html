@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="logo.ico">
+    <link rel="stylesheet" href="./style.css">
+    <title>Coordinates Counter</title>
+</head>
+<body>
+    <main>
+        <header class="preview">
+            <h1>Расчитать программу перемещения по?</h1>
+            <div class="preview_block">
+                <button class="btn_show_diagonal">Радиусу</button>
+                <button class="btn_show_circle">Окружности</button>
+                <button class="btn_show_rows">Строкам</button>
+                <button class="btn_show_cols">Столбцам</button>
+            </div>
+        </header>
+        <section class="diagonal hide">
+            <h1>Расчет программы перемещения по радиусу</h1>
+            <hr>
+            <form class="form_diagonal" action="#">
+                <label>
+                    Введите необходимый угол:<br>
+                    <input required type="number" step="0.1" class="angle_d"/>
+                </label>
+                <label>
+                    Введите значение радиуса:<br>
+                    <input required type="number" min="0" step="0.1" class="radius_d"/>
+                </label>
+                <label>
+                    Введите необходимое значение шага:<br>
+                    <input required type="number" step="0.1" class="stepvalue_d"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси X:<br>
+                    <input required type="number" step="0.1" class="initialx_d"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси Y:<br>
+                    <input required type="number" step="0.1" class="initialy_d"/>
+                </label>
+                <label>
+                    Введите скорость перемещения<br>
+                    <input required value="100" type="number" step="0.1" class="speed_d"/>
+                </label>
+                <label>
+                    Введите необходимую мощность лазера<br>
+                    <input required value="2" type="number" step="1" class="PLaser_d"/>
+                </label>
+                <label>
+                    Введите время паузы<br>
+                    <input required value="2" type="number" step="0.1" class="delay_d"/>
+                </label>
+                <button class="btn">Составить программу</button>
+            </form>
+            <h2>Программа</h2>
+            <div class="new_program_d"></div>
+            <button class="btn_on_main_d">На главную</button>
+        </section>
+        <section class="circle hide">
+            <h1>Расчет программы перемещения по окружности</h1>
+            <hr>
+            <form class="form_circle" action="#">
+                <label>
+                    Введите значение радиуса:<br>
+                    <input required type="number" min="0" step="0.1" class="radius_c"/>
+                </label>
+                <label>
+                    Введите необходимое значение шага по дуге:<br>
+                    <input required type="number" step="0.1" class="stepvalue_c"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси X:<br>
+                    <input required type="number" step="0.1" class="initialx_c"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси Y:<br>
+                    <input required type="number" step="0.1" class="initialy_c"/>
+                </label>
+                <label>
+                    Введите скорость перемещения<br>
+                    <input required value="50" type="number" step="0.1" class="speed_c"/>
+                </label>
+                <label>
+                    Введите необходимую мощность лазера<br>
+                    <input required value="2" type="number" step="1" class="PLaser_c"/>
+                </label>
+                <label>
+                    Введите время паузы<br>
+                    <input required value="2" type="number" step="0.1" class="delay_c"/>
+                </label>
+                <button class="btn">Составить программу</button>
+            </form>
+            <h2>Программа</h2>
+            <div class="new_program_c"></div>
+            <button class="btn_on_main_c">На главную</button>
+        </section>
+        <section class="rows hide">
+            <h1>Расчет координат перемещения по строкам</h1>
+            <hr>
+            <form class="form_rows" action="#">
+                <label>
+                    Введите необходимый радиус:<br>
+                    <input required type="number" step="0.1" class="radius_r"/>
+                </label>
+                <label>
+                    Введите необходимое значение шага по X и Y:<br>
+                    <input required type="number" step="0.1" class="stepvalue_r"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси X:<br>
+                    <input required type="number" step="0.1" class="initialx_r"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси Y:<br>
+                    <input required type="number" step="0.1" class="initialy_r"/>
+                </label>
+                <button class="btn">1 2 quarter</button>
+            </form>
+            <h2>Новые координаты</h2>
+            <div class="new_coordinate">
+                <div class="program"></div>
+            </div>
+            <button class="btn_on_main_r">На главную</button>
+        </section>
+        <section class="cols hide">
+            <form class="form_cols" action="#">
+
+            </form>
+            <button class="btn_on_main_cols">На главную</button>
+        </section>
+    </main>
+    <script src="./script.js"></script>
+</body>
+</html>
