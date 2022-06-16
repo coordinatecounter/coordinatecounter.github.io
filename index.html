@@ -44,15 +44,15 @@
                     <input required type="number" step="0.1" class="initialy_d"/>
                 </label>
                 <label>
-                    Введите скорость перемещения<br>
+                    Введите скорость перемещения:<br>
                     <input required value="100" type="number" step="0.1" class="speed_d"/>
                 </label>
                 <label>
-                    Введите необходимую мощность лазера<br>
+                    Введите необходимую мощность лазера:<br>
                     <input required value="2" type="number" step="1" class="PLaser_d"/>
                 </label>
                 <label>
-                    Введите время паузы<br>
+                    Введите время паузы:<br>
                     <input required value="2" type="number" step="0.1" class="delay_d"/>
                 </label>
                 <button class="btn">Составить программу</button>
@@ -82,15 +82,15 @@
                     <input required type="number" step="0.1" class="initialy_c"/>
                 </label>
                 <label>
-                    Введите скорость перемещения<br>
+                    Введите скорость перемещения:<br>
                     <input required value="50" type="number" step="0.1" class="speed_c"/>
                 </label>
                 <label>
-                    Введите необходимую мощность лазера<br>
+                    Введите необходимую мощность лазера:<br>
                     <input required value="2" type="number" step="1" class="PLaser_c"/>
                 </label>
                 <label>
-                    Введите время паузы<br>
+                    Введите время паузы:<br>
                     <input required value="2" type="number" step="0.1" class="delay_c"/>
                 </label>
                 <button class="btn">Составить программу</button>
@@ -104,8 +104,8 @@
             <hr>
             <form class="form_rows" action="#">
                 <label>
-                    Введите необходимый радиус:<br>
-                    <input required type="number" step="0.1" class="radius_r"/>
+                    Введите значение радиуса:<br>
+                    <input required type="number" min="0" step="0.1" class="radius_r"/>
                 </label>
                 <label>
                     Введите необходимое значение шага по X и Y:<br>
@@ -119,20 +119,86 @@
                     Введите начальную координату по оси Y:<br>
                     <input required type="number" step="0.1" class="initialy_r"/>
                 </label>
-                <button class="btn">1 2 quarter</button>
+                <label>
+                    Введите скорость перемещения:<br>
+                    <input required value="100" type="number" step="0.1" class="speed_r"/>
+                </label>
+                <label>
+                    Введите необходимую мощность лазера:<br>
+                    <input required value="2" type="number" step="1" class="PLaser_r"/>
+                </label>
+                <label>
+                    Введите время паузы:<br>
+                    <input required value="2" type="number" step="0.1" class="delay_r"/>
+                </label>
+                <button class="btn">Составить программу</button>
             </form>
-            <h2>Новые координаты</h2>
-            <div class="new_coordinate">
-                <div class="program"></div>
+            <h2>Программа</h2>
+            <div class="new_program_r">
+                <div>
+                    <div class="title_quarter">1 и 2 квадрант</div>
+                    <div class="quarter_1_2_r"></div>
+                </div>
+                
+                <div>
+                    <div class="title_quarter">3 и 4 квадрант</div>
+                    <div class="quarter_3_4_r"></div>
+                </div>
             </div>
             <button class="btn_on_main_r">На главную</button>
         </section>
+
+
+
+
         <section class="cols hide">
             <form class="form_cols" action="#">
-
+                <label>
+                    Введите значение радиуса:<br>
+                    <input required type="number" min="0" step="0.1" class="radius_cols"/>
+                </label>
+                <label>
+                    Введите необходимое значение шага по X и Y:<br>
+                    <input required type="number" step="0.1" class="stepvalue_cols"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси X:<br>
+                    <input required type="number" step="0.1" class="initialx_cols"/>
+                </label>
+                <label>
+                    Введите начальную координату по оси Y:<br>
+                    <input required type="number" step="0.1" class="initialy_cols"/>
+                </label>
+                <label>
+                    Введите скорость перемещения:<br>
+                    <input required value="100" type="number" step="0.1" class="speed_cols"/>
+                </label>
+                <label>
+                    Введите необходимую мощность лазера:<br>
+                    <input required value="2" type="number" step="1" class="PLaser_cols"/>
+                </label>
+                <label>
+                    Введите время паузы:<br>
+                    <input required value="2" type="number" step="0.1" class="delay_cols"/>
+                </label>
+                <button class="btn">Составить программу</button>
             </form>
+            <h2>Программа</h2>
+            <div class="new_program_cols">
+                <div>
+                    <div class="title_quarter">1 и 4 квадрант</div>
+                    <div class="quarter_1_4_cols"></div>
+                </div>
+                
+                <div>
+                    <div class="title_quarter">2 и 3 квадрант</div>
+                    <div class="quarter_2_3_cols"></div>
+                </div>
+            </div>
             <button class="btn_on_main_cols">На главную</button>
         </section>
+
+
     </main>
     <script src="./script.js"></script>
 </body>

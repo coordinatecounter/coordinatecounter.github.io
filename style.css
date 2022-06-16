@@ -102,18 +102,11 @@ input:focus {
     grid-template-rows: repeat(9, 90px);
     align-items: center;
 }
-.form_circle {
+.form_circle, .form_rows {
     margin-top: 20px;
     width: 500px;
     display: grid;
     grid-template-rows: repeat(8, 90px);
-    align-items: center;
-}
-.form_rows {
-    margin-top: 20px;
-    width: 500px;
-    display: grid;
-    grid-template-rows: repeat(5, 90px);
     align-items: center;
 }
 .form_cols {
@@ -147,20 +140,44 @@ input:focus {
 /* новые координаты */
 .new_program_d, .new_program_c {
     display: grid;
-    padding: 10px 0px;
-    grid-template-columns: 1fr 1fr;
+    padding: 20px 0px;
+    grid-template-columns: 1fr;
     column-gap: 40px;
     background: white;
     width: 500px;
-    justify-items: center;
+    min-height: 500px;
     border-radius: 4px;
     transition: 0.5s all;
+}
+.new_program_r, .new_program_cols {
+    display: grid;
+    padding: 20px 0px;
+    grid-template-columns: 1fr 1fr;
+    background: white;
+    width: 500px;
+    min-height: 500px;
+    border-radius: 4px;
+    transition: 0.5s all;
+    justify-items: center;
 }
 .program {
     padding-left: 50px;
     font-size: 14px;
     font-weight: 600;
     color: rgb(61, 60, 60);
+}
+.program_rows-cols {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(61, 60, 60);
+}
+.title_quarter {
+    text-align: center;
+    color: rgb(31, 29, 29);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-decoration: underline;
 }
 
 /* кнопка на главную + вспомогательные классы отображения */

@@ -28,9 +28,22 @@ window.addEventListener('DOMContentLoaded', () => {
             inputStepValueR = document.querySelector('.stepvalue_r'),
             inputInitialXR = document.querySelector('.initialx_r'),
             inputInitialYR = document.querySelector('.initialy_r'),
-            program = document.querySelector('.program')
-    const formCols = document.querySelector('.form_cols')
+            inputSpeedValueR = document.querySelector('.speed_r'),
+            inputPLaserR = document.querySelector('.PLaser_r'),
+            inputDelayR = document.querySelector('.delay_r'),
+            newProgramQuarter_1_2 = document.querySelector('.quarter_1_2_r'),
+            newProgramQuarter_3_4 = document.querySelector('.quarter_3_4_r')
 
+    const formCols = document.querySelector('.form_cols'),
+            inputRadiusCols = document.querySelector('.radius_cols'),
+            inputStepValueCols = document.querySelector('.stepvalue_cols'),
+            inputInitialXCols = document.querySelector('.initialx_cols'),
+            inputInitialYCols = document.querySelector('.initialy_cols'),
+            inputSpeedValueCols = document.querySelector('.speed_cols'),
+            inputPLaserCols = document.querySelector('.PLaser_cols'),
+            inputDelayCols = document.querySelector('.delay_cols'),
+            newProgramQuarter_1_4 = document.querySelector('.quarter_1_4_cols'),
+            newProgramQuarter_2_3 = document.querySelector('.quarter_2_3_cols')
 
     const showDiagonal = document.querySelector('.btn_show_diagonal'),
             showCircle = document.querySelector('.btn_show_circle'),
@@ -275,56 +288,138 @@ window.addEventListener('DOMContentLoaded', () => {
         // отмена стандартного поведения браузера
         e.preventDefault()
         // очистка результатов
-        program.innerHTML = ''
+        newProgramQuarter_1_2.innerHTML = ''
+        newProgramQuarter_3_4.innerHTML = ''
         // объявления переменных
-        // НАДО РАДИУС ОТ ПОЛЬЗОВАТЕЛЯ И ЗНАЧЕНИЕ ШАГА
         let R = +inputRadiusR.value,
             stepvalue = +inputStepValueR.value,
             initialx = +inputInitialXR.value,
             initialy = +inputInitialYR.value,
-            firstAndSecondQuarters = [],
-            thirdAndFourthQuarters = []
+            speed = +inputSpeedValueR.value,
+            power = +inputPLaserR.value,
+            delay = +inputDelayR.value,
+            quarters_1_2 = [],
+            quarters_3_4 = []
 
         // логика расчета
-        let limitPX = initialx + R
-        let limitMX = initialx - R
-        let limitPY = initialy + R
-        let limitMY = initialy
+        // лимиты для 1 и 2 четверти
+        let limitPX_1_2 = initialx + R
+        let limitMX_1_2 = initialx - R
+        let limitPY_1_2 = initialy + R
+        let limitMY_1_2 = initialy
 
-        
-        while (limitPX >= limitMX) {
-            let Ri = Math.sqrt(Math.pow((limitPX - initialx), 2) + Math.pow((limitMY - initialy), 2))
+        // лимиты для 3 и 4 четверти
+        let limitPX_3_4 = initialx + R
+        let limitMX_3_4 = initialx - R
+        let limitPY_3_4 = initialy
+        let limitMY_3_4 = initialy - R
 
+        // основной цикл генерации программы перемещения для 1 и 2 четверти
+        while (limitPX_1_2 >= limitMX_1_2) {
+            let Ri = Math.sqrt(Math.pow((limitPX_1_2 - initialx), 2) + Math.pow((limitMY_1_2 - initialy), 2))
+            
             if (Ri <= R) {
-                firstAndSecondQuarters.push(`X = ${limitPX},Y = ${limitMY}`)
+                quarters_1_2.push(`X${+limitPX_1_2.toFixed(2)},Y${+limitMY_1_2.toFixed(2)}`)  
             } 
 
-            if (limitPX === limitMX) {
-                limitMY+=stepvalue
-                limitPX = initialx + R
+            if (limitPX_1_2 === limitMX_1_2) {
+                limitMY_1_2+=stepvalue
+                limitPX_1_2 = initialx + R
             } else {
-                limitPX-=stepvalue
+                limitPX_1_2-=stepvalue
             }
-            if (limitMY > limitPY) {
+
+            if (limitMY_1_2 > limitPY_1_2) {
                 break
             }
         }
 
-        
-        
-        
-        firstAndSecondQuarters.map(item => {
-            const listItem = document.createElement('div') 
-            listItem.classList.add('list')  
-            listItem.innerHTML = `
-                <div>M5</div>
-                <div>G1 ${item.split(',')[0]} ${item.split(',')[1]}</div>
-                <div>M3 S2</div>
-                <div>G04 P2.</div>
+        // основной цикл генерации программы перемещения для 3 и 4 четверти
+        while (limitPX_3_4 >= limitMX_3_4) {
+            let Ri = Math.sqrt(Math.pow((limitPX_3_4 - initialx), 2) + Math.pow((limitPY_3_4 - initialy), 2))
+
+            if (Ri <= R) {
+                quarters_3_4.push(`X${+limitPX_3_4.toFixed(2)},Y${+limitPY_3_4.toFixed(2)}`)
+            } 
+
+            if (limitPX_3_4 === limitMX_3_4) {
+                limitPY_3_4-=stepvalue
+                limitPX_3_4 = initialx + R
+            } else {
+                limitPX_3_4-=stepvalue
+            }
+
+            if (limitPY_3_4 < limitMY_3_4) {
+                break
+            }
+        }
+
+        // преобразование массивов координат в основной цикл программы
+        const intermediateArr_1 = [...quarters_1_2]
+        const firsItem_1 = intermediateArr_1.shift()
+        let finalQuarter_1_2 = intermediateArr_1.map((item) => {
+            let listItem = ''
+            return listItem = `
+                <div>F${speed} G1 ${item.split(',')[0]} ${item.split(',')[1]}</div>
+                <div>M3 S${power}</div>
+                <div>G04 P${delay}.</div>
                 <div>M5</div>
             `
-            program.append(listItem)
         })
+
+        const intermediateArr_2 = [...quarters_3_4]
+        const firsItem_2 = intermediateArr_2.shift()
+        let finalQuarter_3_4 = intermediateArr_2.map((item) => {
+            let listItem = ''
+            return listItem = `
+                <div>F${speed} G1 ${item.split(',')[0]} ${item.split(',')[1]}</div>
+                <div>M3 S${power}</div>
+                <div>G04 P${delay}.</div>
+                <div>M5</div>
+            `
+        })
+
+        // отображение на странице результатов расчета
+        const program_1_2 = document.createElement('div')
+        program_1_2.classList.add('program_rows-cols')
+        program_1_2.innerHTML = `
+            <div>M5</div>
+            <div>F300 G1 X${initialx} Y${initialy} Z0</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>F100 G1 ${firsItem_1.split(',')[0]}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>${finalQuarter_1_2.join('')}</div>
+            <div>F150 G1 X${initialx} Y${initialy}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+        `
+
+        const program_3_4 = document.createElement('div')
+        program_3_4.classList.add('program_rows-cols')
+        program_3_4.innerHTML = `
+            <div>M5</div>
+            <div>F300 G1 X${initialx} Y${initialy} Z0</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>F100 G1 ${firsItem_2.split(',')[0]}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>${finalQuarter_3_4.join('')}</div>
+            <div>F150 G1 X${initialx} Y${initialy}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+        `
+        newProgramQuarter_1_2.append(program_1_2)
+        newProgramQuarter_3_4.append(program_3_4)
+        
     }
     // обработчик формы для строчек
     formRows.addEventListener('submit', rowsCalc)
@@ -334,6 +429,137 @@ window.addEventListener('DOMContentLoaded', () => {
         // отмена стандартного поведения браузера
         e.preventDefault()
         // очистка результатов
+        newProgramQuarter_1_4.innerHTML = ''
+        newProgramQuarter_2_3.innerHTML = ''
+        // объявления переменных
+        let R = +inputRadiusCols.value,
+            stepvalue = +inputStepValueCols.value,
+            initialx = +inputInitialXCols.value,
+            initialy = +inputInitialYCols.value,
+            speed = +inputSpeedValueCols.value,
+            power = +inputPLaserCols.value,
+            delay = +inputDelayCols.value,
+            quarters_1_4 = [],
+            quarters_2_3 = []
+
+        // логика расчета
+        // лимиты для 1 и 4 четверти
+        let limitPX_1_4 = initialx + R
+        let limitMX_1_4 = initialx
+        let limitPY_1_4 = initialy + R
+        let limitMY_1_4 = initialy - R
+        
+        // лимиты для 2 и 3 четверти
+        let limitPX_2_3 = initialx
+        let limitMX_2_3 = initialx - R
+        let limitPY_2_3 = initialy + R
+        let limitMY_2_3 = initialy - R
+
+        // основной цикл генерации программы перемещения для 1 и 4 четверти
+        while (limitPY_1_4 >= limitMY_1_4) {
+            let Ri = Math.sqrt(Math.pow((limitMX_1_4 - initialx), 2) + Math.pow((limitPY_1_4 - initialy), 2))
+            
+            if (Ri <= R) {
+                quarters_1_4.push(`X${+limitMX_1_4.toFixed(2)},Y${+limitPY_1_4.toFixed(2)}`)  
+            } 
+
+            if (limitPY_1_4 === limitMY_1_4) {
+                limitMX_1_4+=stepvalue
+                limitPY_1_4 = initialy + R
+            } else {
+                limitPY_1_4-=stepvalue
+            }
+
+            if (limitMX_1_4 > limitPX_1_4) {
+                break
+            }
+        }
+
+        // основной цикл генерации программы перемещения для 2 и 3 четверти
+        while (limitPY_2_3 >= limitMY_2_3) {
+            let Ri = Math.sqrt(Math.pow((limitPX_2_3 - initialx), 2) + Math.pow((limitPY_2_3 - initialy), 2))
+
+            if (Ri <= R) {
+                quarters_2_3.push(`X${+limitPX_2_3.toFixed(2)},Y${+limitPY_2_3.toFixed(2)}`)
+            } 
+
+            if (limitPY_2_3 === limitMY_2_3) {
+                limitPX_2_3-=stepvalue
+                limitPY_2_3 = initialx + R
+            } else {
+                limitPY_2_3-=stepvalue
+            }
+
+            if (limitPX_2_3 < limitMX_2_3) {
+                break
+            }
+        }
+
+        // преобразование массивов координат в основной цикл программы
+        const intermediateArr_1 = [...quarters_1_4]
+        const firsItem_1 = intermediateArr_1.shift()
+        let finalQuarter_1_4 = intermediateArr_1.map((item) => {
+            let listItem = ''
+            return listItem = `
+                <div>F${speed} G1 ${item.split(',')[0]} ${item.split(',')[1]}</div>
+                <div>M3 S${power}</div>
+                <div>G04 P${delay}.</div>
+                <div>M5</div>
+            `
+        })
+
+        const intermediateArr_2 = [...quarters_2_3]
+        const firsItem_2 = intermediateArr_2.shift()
+        let finalQuarter_2_3 = intermediateArr_2.map((item) => {
+            let listItem = ''
+            return listItem = `
+                <div>F${speed} G1 ${item.split(',')[0]} ${item.split(',')[1]}</div>
+                <div>M3 S${power}</div>
+                <div>G04 P${delay}.</div>
+                <div>M5</div>
+            `
+        })
+
+        // отображение на странице результатов расчета
+        const program_1_4 = document.createElement('div')
+        program_1_4.classList.add('program_rows-cols')
+        program_1_4.innerHTML = `
+            <div>M5</div>
+            <div>F300 G1 X${initialx} Y${initialy} Z0</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>F100 G1 ${firsItem_1.split(',')[0]}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>${finalQuarter_1_4.join('')}</div>
+            <div>F150 G1 X${initialx} Y${initialy}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+        `
+
+        const program_2_3 = document.createElement('div')
+        program_2_3.classList.add('program_rows-cols')
+        program_2_3.innerHTML = `
+            <div>M5</div>
+            <div>F300 G1 X${initialx} Y${initialy} Z0</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>F100 G1 ${firsItem_2.split(',')[0]}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+            <div>${finalQuarter_2_3.join('')}</div>
+            <div>F150 G1 X${initialx} Y${initialy}</div>
+            <div>M3 S${power}</div>
+            <div>G04 P4.</div>
+            <div>M5</div>
+        `
+        newProgramQuarter_1_4.append(program_1_4)
+        newProgramQuarter_2_3.append(program_2_3)
     }
     // обработчик формы для столбцов
     formCols.addEventListener('submit', colsCalc)
