@@ -270,7 +270,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <div>M5</div>
             <div>F100 G1 ${firsItem.split(',')[0]}</div>
             <div>M3 S${power}</div>
-            <div>G04 P4.</div>
+            <div>G04 P${delay}.</div>
             <div>M5</div>
             <div>${mainArr.join('')}</div>
             <div>F150 G1 X${initialX} Y${initialY}</div>
@@ -315,14 +315,14 @@ window.addEventListener('DOMContentLoaded', () => {
         let limitMY_3_4 = initialy - R
 
         // основной цикл генерации программы перемещения для 1 и 2 четверти
-        while (limitPX_1_2 >= limitMX_1_2) {
+        while (limitPX_1_2 >= limitMX_1_2 || limitPX_1_2 < limitMX_1_2) {
             let Ri = Math.sqrt(Math.pow((limitPX_1_2 - initialx), 2) + Math.pow((limitMY_1_2 - initialy), 2))
             
             if (Ri <= R) {
                 quarters_1_2.push(`X${+limitPX_1_2.toFixed(2)},Y${+limitMY_1_2.toFixed(2)}`)  
             } 
 
-            if (limitPX_1_2 === limitMX_1_2) {
+            if (limitPX_1_2 <= limitMX_1_2) {
                 limitMY_1_2+=stepvalue
                 limitPX_1_2 = initialx + R
             } else {
@@ -335,14 +335,14 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         // основной цикл генерации программы перемещения для 3 и 4 четверти
-        while (limitPX_3_4 >= limitMX_3_4) {
+        while (limitPX_3_4 >= limitMX_3_4 || limitPX_3_4 < limitMX_3_4) {
             let Ri = Math.sqrt(Math.pow((limitPX_3_4 - initialx), 2) + Math.pow((limitPY_3_4 - initialy), 2))
 
             if (Ri <= R) {
                 quarters_3_4.push(`X${+limitPX_3_4.toFixed(2)},Y${+limitPY_3_4.toFixed(2)}`)
             } 
 
-            if (limitPX_3_4 === limitMX_3_4) {
+            if (limitPX_3_4 <= limitMX_3_4) {
                 limitPY_3_4-=stepvalue
                 limitPX_3_4 = initialx + R
             } else {
@@ -390,7 +390,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <div>M5</div>
             <div>F100 G1 ${firsItem_1.split(',')[0]}</div>
             <div>M3 S${power}</div>
-            <div>G04 P4.</div>
+            <div>G04 P${delay}.</div>
             <div>M5</div>
             <div>${finalQuarter_1_2.join('')}</div>
             <div>F150 G1 X${initialx} Y${initialy}</div>
@@ -409,7 +409,7 @@ window.addEventListener('DOMContentLoaded', () => {
             <div>M5</div>
             <div>F100 G1 ${firsItem_2.split(',')[0]}</div>
             <div>M3 S${power}</div>
-            <div>G04 P4.</div>
+            <div>G04 P${delay}.</div>
             <div>M5</div>
             <div>${finalQuarter_3_4.join('')}</div>
             <div>F150 G1 X${initialx} Y${initialy}</div>
@@ -456,14 +456,14 @@ window.addEventListener('DOMContentLoaded', () => {
         let limitMY_2_3 = initialy - R
 
         // основной цикл генерации программы перемещения для 1 и 4 четверти
-        while (limitPY_1_4 >= limitMY_1_4) {
+        while (limitPY_1_4 >= limitMY_1_4 || limitPY_1_4 < limitMY_1_4) {
             let Ri = Math.sqrt(Math.pow((limitMX_1_4 - initialx), 2) + Math.pow((limitPY_1_4 - initialy), 2))
             
             if (Ri <= R) {
                 quarters_1_4.push(`X${+limitMX_1_4.toFixed(2)},Y${+limitPY_1_4.toFixed(2)}`)  
             } 
 
-            if (limitPY_1_4 === limitMY_1_4) {
+            if (limitPY_1_4 <= limitMY_1_4) {
                 limitMX_1_4+=stepvalue
                 limitPY_1_4 = initialy + R
             } else {
@@ -476,16 +476,20 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         // основной цикл генерации программы перемещения для 2 и 3 четверти
-        while (limitPY_2_3 >= limitMY_2_3) {
+        while (limitPY_2_3 >= limitMY_2_3 || limitPY_2_3 < limitMY_2_3) {
             let Ri = Math.sqrt(Math.pow((limitPX_2_3 - initialx), 2) + Math.pow((limitPY_2_3 - initialy), 2))
-
+            console.log('+y', limitPY_2_3)
+            console.log('-y', limitMY_2_3)
+            console.log('+x', limitPX_2_3)
+            console.log('-x', limitMX_2_3)
+            console.log('-----------------')
             if (Ri <= R) {
                 quarters_2_3.push(`X${+limitPX_2_3.toFixed(2)},Y${+limitPY_2_3.toFixed(2)}`)
             } 
 
-            if (limitPY_2_3 === limitMY_2_3) {
+            if (limitPY_2_3 <= limitMY_2_3) {
                 limitPX_2_3-=stepvalue
-                limitPY_2_3 = initialx + R
+                limitPY_2_3 = initialy + R
             } else {
                 limitPY_2_3-=stepvalue
             }
@@ -529,9 +533,9 @@ window.addEventListener('DOMContentLoaded', () => {
             <div>M3 S${power}</div>
             <div>G04 P4.</div>
             <div>M5</div>
-            <div>F100 G1 ${firsItem_1.split(',')[0]}</div>
+            <div>F100 G1 ${firsItem_1.split(',')[1]}</div>
             <div>M3 S${power}</div>
-            <div>G04 P4.</div>
+            <div>G04 P${delay}.</div>
             <div>M5</div>
             <div>${finalQuarter_1_4.join('')}</div>
             <div>F150 G1 X${initialx} Y${initialy}</div>
@@ -548,9 +552,9 @@ window.addEventListener('DOMContentLoaded', () => {
             <div>M3 S${power}</div>
             <div>G04 P4.</div>
             <div>M5</div>
-            <div>F100 G1 ${firsItem_2.split(',')[0]}</div>
+            <div>F100 G1 ${firsItem_2.split(',')[1]}</div>
             <div>M3 S${power}</div>
-            <div>G04 P4.</div>
+            <div>G04 P${delay}.</div>
             <div>M5</div>
             <div>${finalQuarter_2_3.join('')}</div>
             <div>F150 G1 X${initialx} Y${initialy}</div>
@@ -564,3 +568,15 @@ window.addEventListener('DOMContentLoaded', () => {
     // обработчик формы для столбцов
     formCols.addEventListener('submit', colsCalc)
 })
+
+
+// let file = new File([json_string], "file.txt", {
+//     type: "text/plain",
+//     });
+    
+//     let link = document.createElement('a');
+//     link.download = file.name;
+    
+//     link.href = URL.createObjectURL(file);
+//     link.click();
+//     URL.revokeObjectURL(link.href);
