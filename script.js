@@ -568,15 +568,3 @@ window.addEventListener('DOMContentLoaded', () => {
     // обработчик формы для столбцов
     formCols.addEventListener('submit', colsCalc)
 })
-
-
-// let file = new File([json_string], "file.txt", {
-//     type: "text/plain",
-//     });
-    
-//     let link = document.createElement('a');
-//     link.download = file.name;
-    
-//     link.href = URL.createObjectURL(file);
-//     link.click();
-//     URL.revokeObjectURL(link.href);
